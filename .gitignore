@@ -1,0 +1,8 @@
+# Contains passwords for dev database
+build/config.sh
+
+# Ignore logs that occur from releases
+*.log
+
+# VSCode secrets (store DB connections)
+.vscode/vsc-task-env

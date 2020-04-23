@@ -1,0 +1,54 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "compile: CHANGEME_TASK_LABLE",
+      "type": "shell",
+      // Run sqlplus via a batch file
+      "command": ".vscode/scripts/_run_sqlplus.sh",
+      // first argument was the Oracle conneciton string. This has since moved. Leave as blank for now
+      // second argument is the file to execute (ie the current file)
+      // Note: This setup is for Docker sqlcl. If you're using native SQLCl use the following arg for second arg
+      // "@\"${file}\""
+      "args": [
+        "ignore", //Leave blank
+        "@/sqlcl/${relativeFile}"
+      ],
+      "group": "build",
+      // do not switch to the output pane automatically
+      "presentation": {
+        "reveal": "always", // always, never, silent
+        "panel": "dedicated" // shared, dedicated, new
+      },
+      "options": {
+        "env": {
+          "TNS_ADMIN": "/oracle/wallets/atp01"
+        }
+        // "shell": {
+        //   "executable": "/bin/zsh"
+        // }
+      },
+      // use this to get any database errors (from user_errors view) listed in the "Problems" pane in VS Code
+      "problemMatcher": {
+        "owner": "plsql",
+        "fileLocation": [
+          "relative",
+          "${fileDirname}"
+        ],
+        "pattern": [
+          {
+            "regexp": "(.*) (\\d*)\/(\\d*) (.*?) (.*)",
+            "severity": 1,
+            "line": 2,
+            "column": 3,
+            "file": 4,
+            "message": 5,
+            "loop": true
+          }
+        ]
+      }
+    }
+  ]
+}
